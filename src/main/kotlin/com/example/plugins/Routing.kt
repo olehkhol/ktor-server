@@ -14,6 +14,20 @@ fun Application.configureRouting() {
         }
     }
     routing {
+        get("/tasks") {
+            call.respondText(
+                contentType = ContentType.parse("text/html"),
+                text = """
+                    <h3>TODO:</h3>
+                    <ol>
+                        <li>A table of all the tasks</li>
+                        <li>A form to submit new taks</li>
+                    </ol>
+                """.trimIndent()
+            )
+        }
+    }
+    routing {
         staticResources("/content", "mycontent")
         get("/") {
             call.respondText("Hello World!")
