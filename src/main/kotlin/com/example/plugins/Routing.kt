@@ -1,6 +1,6 @@
 package com.example.plugins
 
-import com.example.model.tasks
+import com.example.model.TaskRepository
 import com.example.model.tasksAsTable
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -15,8 +15,11 @@ fun Application.configureRouting() {
             call.respondText("App in illegal state as ${cause.message}")
         }
     }
+
     routing {
         get("/tasks") {
+            val tasks = TaskRepository.allTasks()
+
             call.respondText(
                 contentType = ContentType.parse("text/html"),
                 text = tasks.tasksAsTable(),
